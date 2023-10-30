@@ -11,7 +11,7 @@ import Divider from 'primevue/divider'
 
 const loading = ref(true)
 const error = ref('')
-const users = ref([])
+const users = ref<any>([])
 const selectedUser = ref()
 
 const total = ref(0)
@@ -19,7 +19,7 @@ const skip = ref(0)
 const limit = ref(Number(localStorage.fetchLimit) || 10)
 const search = ref('')
 
-let timeout
+let timeout: NodeJS.Timeout | number
 
 const fetchUsers = async () => {
   loading.value = true
@@ -32,14 +32,19 @@ const fetchUsers = async () => {
     users.value = response.users
     total.value = response.total
   } catch (err) {
-    console.error('Error fetching users:', err.message)
-    error.value = err.message
+    if (err instanceof Error) {
+      console.error('Error fetching user:', err)
+      error.value = err.message
+    } else {
+      console.error('Error fetching user:', err)
+      error.value = 'An unexpected error occurred'
+    }
   } finally {
     loading.value = false
   }
 }
 
-const onPaginate = (e) => {
+const onPaginate = (e: any) => {
   if (limit.value !== e.rows) {
     limit.value = e.rows
     localStorage.fetchLimit = limit.value
@@ -69,8 +74,13 @@ const searchUsersHandler = async () => {
     users.value = response.users
     total.value = response.total
   } catch (err) {
-    console.error('Error fetching users:', err.message)
-    error.value = err.message
+    if (err instanceof Error) {
+      console.error('Error fetching user:', err)
+      error.value = err.message
+    } else {
+      console.error('Error fetching user:', err)
+      error.value = 'An unexpected error occurred'
+    }
   } finally {
     loading.value = false
   }

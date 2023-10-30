@@ -1,8 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const tradeInfo = ref(null)
-let socket
+interface TradeInfo {
+  p: string
+  q: string
+}
+
+const tradeInfo = ref<TradeInfo | null>(null)
+let socket: WebSocket | null = null
 
 onMounted(() => {
   socket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade')
@@ -13,7 +18,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  socket.close()
+  if (socket && 'close' in socket) {
+    socket.close()
+  }
 })
 </script>
 

@@ -3,7 +3,9 @@
 <template>
   <header class="header">
     <div class="container">
-      <h2>Test task</h2>
+      <router-link to="/" class="header__title">
+        <h2>Test task</h2>
+      </router-link>
 
       <ul class="header__menu">
         <li>
@@ -29,6 +31,11 @@
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #dedede;
+
+  &__title {
+    text-decoration: none;
+    color: unset;
+  }
 
   &__menu {
     display: flex;

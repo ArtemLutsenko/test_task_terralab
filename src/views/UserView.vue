@@ -12,15 +12,20 @@ const route = useRoute()
 const loading = ref(true)
 const error = ref('')
 const userId = route.params.id as string
-const user = ref(null)
+const user = ref<any>(null)
 
 const fetchUser = async () => {
   loading.value = true
   try {
     user.value = await getUserById(userId)
   } catch (err) {
-    console.error('Error fetching user:', err)
-    error.value = err.message
+    if (err instanceof Error) {
+      console.error('Error fetching user:', err)
+      error.value = err.message
+    } else {
+      console.error('Error fetching user:', err)
+      error.value = 'An unexpected error occurred'
+    }
   } finally {
     loading.value = false
   }
