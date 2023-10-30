@@ -1,4 +1,10 @@
-# TerraLab
+# TerraLab test work
+
+Users/user page: Users from https://dummyjson.com/
+On Chart page we have websocket connection with binance
+
+node: v18.12.0
+
 
 ## Project Setup
 

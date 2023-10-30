@@ -153,5 +153,8 @@ onUnmounted(() => {
   &__title {
     margin-bottom: 20px;
   }
+  .pi.pi-search{
+    transform: translateY(-50%);
+  }
 }
 </style>
