@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted} from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { getAllUsers, searchUsers } from '@/api/user'
 import { useRouter } from 'vue-router'
 
@@ -88,7 +88,6 @@ onMounted(() => {
 onUnmounted(() => {
   clearTimeout(timeout)
 })
-
 </script>
 
 <template>

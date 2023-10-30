@@ -8,8 +8,7 @@ onMounted(() => {
   socket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade')
 
   socket.onmessage = (event) => {
-    const tradeData = JSON.parse(event.data)
-    tradeInfo.value = tradeData
+    tradeInfo.value = JSON.parse(event.data)
   }
 })
 
